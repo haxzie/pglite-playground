@@ -10,7 +10,7 @@ import { useDatabase } from "./store/Database";
 
 function App() {
   const [result, setResult] = useState<Results<unknown>>();
-  const [error, setError] = useState<unknown | any>();
+  const [error] = useState<unknown | any>();
   const { runQuery } = useDatabase();
 
   const run = async (query: string) => {

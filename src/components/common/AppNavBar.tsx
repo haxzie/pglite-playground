@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./AppNavBar.module.scss";
 import Logo from "../icons/Logo";
 

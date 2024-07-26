@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./Explorer.module.scss";
 import SearchIcon from "../../icons/SearchIcon";
 import { Panel } from "react-resizable-panels";

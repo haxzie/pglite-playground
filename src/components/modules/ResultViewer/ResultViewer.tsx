@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./ResultViewer.module.scss";
 import { Results } from "@electric-sql/pglite";
 
@@ -27,9 +26,10 @@ export default function ResultViewer({
                   {field.name}
                 </div>
               ))}
-              {(result?.rows || []).map((row, i) =>
+              {(result?.rows || []).map((row) =>
                 (result?.fields || []).map((field) => (
                   <div key={field.name} className={styles.cell}>
+                    {/* @ts-ignore */}
                     {row && field.name && row[field.name] ? `${row[field.name]}` : ""}
                   </div>
                 ))

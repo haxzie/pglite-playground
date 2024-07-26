@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { DBTable } from "./Explorer.types";
 import styles from "./TableRow.module.scss";
-import ChevronDownIcon from "../../icons/ChevronDownIcon";
 import TableIcon from "../../icons/TableIcon";
 import ChevronRightIcon from "../../icons/ChevronRightIcon";
 import ColumnIcon from "../../icons/ColumnIcon";

@@ -15,7 +15,7 @@ export interface DatabaseState {
   }) => Promise<{ result: Results<T> | undefined; error: unknown }>;
 }
 
-export const useDatabase = create<DatabaseState>()((set) => ({
+export const useDatabase = create<DatabaseState>()(() => ({
   error: "",
   result: undefined,
   currentDatabase: "default-pgsql",
