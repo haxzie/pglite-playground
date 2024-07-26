@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Oswald:wght@200..700&display=swap');
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url('../fonts/inter/inter.ttf') format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Borel";
+  src: url('../fonts/Borel/Borel-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  font-weight: 400px;
+  line-height: 1.5rem;
+  // font-family: 'Inter', sans-serif;
+  // font-family: "Noto Sans", sans-serif;
+  font-family: "Inter", sans-serif;
+  color: var(--color-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  span,
+  p,
+  pre,
+  label {
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    color: var(--color-font);
+    font-family: "Inter", sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.text-xs {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-xs);
+}
+
+.text-s {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  font-weight: var(--font-weight-s);
+}
+
+.text-l {
+  font-size: var(--font-size-l-medium);
+  line-height: var(--line-height-l-medium);
+  font-weight: var(--font-weight-l-medium);
+}

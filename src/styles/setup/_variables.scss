@@ -1,0 +1,27 @@
+$red: #ff5500;
+:root {
+  --radius-l: 8px;
+  --radius-m: 4px;
+  --radius-s: 2px;
+  --radius-rounded: 100px;
+
+  // font sizes
+
+  --font-size: 1rem; // 16px
+  --line-height: 1.5rem; // 24px
+  --font-weight: 400;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 600;
+
+  --font-size-xs: 0.75rem; // 12px
+  --line-height-xs: 1rem; // 16px
+
+  --font-size-s: 0.875rem; // 14px
+  --line-height-s: 1.25rem; // 20px
+
+  --font-size-l: 1.25rem; // 20px 
+  --line-height-l: 2rem; // 32px
+
+  --font-size-xl: 1.5rem;
+  --line-height-xl: 2.25rem;
+}

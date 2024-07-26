@@ -1,0 +1,52 @@
+.resultViewer {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  height: 100%;
+  border-top: 1px solid var(--color-border);
+  overflow: auto;
+
+  .result {
+    display: grid;
+    overflow: auto;
+    min-width: min-content;
+    height: 100%;
+    align-content: flex-start;
+
+    .field {
+      max-width: 300px;
+      padding: 10px;
+      border-bottom: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-background);
+      position: sticky;
+      top: 0;
+      font-size: var(--font-size-s);
+      font-weight: var(--font-weight-semibold);
+      height: 48px;
+
+      .label {
+        font-weight: bold;
+      }
+
+      .value {
+        color: var(--color-primary);
+      }
+    }
+
+    .cell {
+      max-width: 300px;
+      padding: 10px;
+      border-bottom: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: var(--font-size-s);
+      height: 48px;
+    }
+  }
+}

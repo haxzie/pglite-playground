@@ -1,0 +1,45 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .editorWrapper {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .codeControls {
+    height: 48px;
+    border-top: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 10px 7px 10px 15px;
+    justify-content: space-between;
+
+    .runButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 7px 10px;
+      border-radius: 5px;
+      background: #069450;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: none;
+      font-size: var(--font-size-s);
+      font-weight: var(--font-weight-semibold);
+
+      &:hover {
+        background: #057a42;
+      }
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+}
