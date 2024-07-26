@@ -8,7 +8,7 @@ export default function AppNavBar() {
         <div className={styles.logo}>
           <Logo size={18} />
         </div>
-        <h1>pgsql<span>.sh</span></h1>
+        <h1>pgsql</h1>
       </div>
       <div className={styles.menu}></div>
     </div>
