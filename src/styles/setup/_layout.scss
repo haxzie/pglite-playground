@@ -163,6 +163,11 @@ main {
     border-right: 1px solid var(--color-border);
     font-size: var(--font-size-s);
   }
+
+  .cm-tooltip-autocomplete {
+    background-color: var(--color-element-background);
+    border: 1px solid var(--color-border);
+  }
 }
 
 .line-editor-config {

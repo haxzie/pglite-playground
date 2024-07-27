@@ -1,15 +1,26 @@
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ResultViewer.module.scss";
 import { Results } from "@electric-sql/pglite";
 
 export default function ResultViewer({
   result,
   error,
+  isQuerying,
 }: {
   result: Results<unknown> | undefined;
   error: string;
+  isQuerying: boolean;
 }) {
   return (
     <div className={styles.resultViewer}>
+      <AnimatePresence>
+        {isQuerying && <motion.div
+        initial={{ opacity: 0.7, translateY: -2 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        exit={{ opacity: 0.7, translateY: -2 }}
+        transition={{ duration: 0.2 }}
+        className={styles.nprogress} />}
+      </AnimatePresence>
       {error ? (
         <div className={styles.error}>{error}</div>
       ) : (
@@ -30,7 +41,9 @@ export default function ResultViewer({
                 (result?.fields || []).map((field) => (
                   <div key={field.name} className={styles.cell}>
                     {/* @ts-ignore */}
-                    {row && field.name && row[field.name] ? `${row[field.name]}` : ""}
+                    {row && field.name && row[field.name]
+                      ? `${row[field.name]}`
+                      : ""}
                   </div>
                 ))
               )}

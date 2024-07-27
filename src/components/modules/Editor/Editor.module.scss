@@ -18,7 +18,20 @@
     padding: 10px 7px 10px 15px;
     justify-content: space-between;
 
+    .info {
+      display: flex;
+      align-items: center;
+
+      .affectedRows {
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-font-light);
+      }
+    }
+
     .runButton {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,8 +43,31 @@
       cursor: pointer;
       transition: background 0.2s;
       border: none;
-      font-size: var(--font-size-s);
-      font-weight: var(--font-weight-semibold);
+
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .loader {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+      }
+
+      &.loading {
+        background-color: #045c31;
+        .content {
+          opacity: 0;
+        }
+        .loader {
+          opacity: 1;
+        }
+      }
 
       &:hover {
         background: #057a42;
