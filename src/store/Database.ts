@@ -47,7 +47,6 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
         console.log("Modifying database, reloading schema");
         get().loadSchema();
       }
-      console.log({ result });
       return { result: result, error: undefined };
     } catch (error: unknown) {
       const executionError = error as DatabaseError;

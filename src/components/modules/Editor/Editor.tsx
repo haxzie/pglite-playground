@@ -57,7 +57,6 @@ export default function Editor({
           )
         : defaultSchema;
 
-    console.log(mySchema);
     setSchema(mySchema);
   }, [databaseSchema]);
 

@@ -16,7 +16,6 @@ export default function EditorArea() {
   const run = async (query: string) => {
     setIsQuerying(true);
     const { result, error } = await runQuery<{ [key: string]: string | boolean | number }>({ query });
-    console.log({ result, error });
     setResult(result);
     setError(error);
     setIsQuerying(false);
