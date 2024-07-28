@@ -2,6 +2,9 @@
   border-right: 2px solid var(--color-border);
   background-color: var(--color-element-background-dark);
   height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .header {
     display: flex;
@@ -71,6 +74,13 @@
     }
   }
 
+  .tables {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    flex: 1;
+    height: 100%;
+  }
   .noTables {
     display: flex;
     flex-direction: column;
