@@ -1,9 +1,10 @@
 import styles from "./SideNavBar.module.scss";
 import Logo from "../icons/Logo";
-import EditorIcon from "../icons/EditorIcon";
+// import EditorIcon from "../icons/EditorIcon";
 import HistoryIcon from "../icons/HistoryIcon";
 import SaveIcon from "../icons/SaveIcon";
 import SettingsIcon from "../icons/SettingsIcon";
+import TableIcon from "../icons/TableIcon";
 
 export default function SideNavBar() {
   const menuItems: Array<{
@@ -13,7 +14,7 @@ export default function SideNavBar() {
   }> = [
     {
       title: "Editor",
-      icon: EditorIcon,
+      icon: TableIcon,
       url: "/",
     },
     {

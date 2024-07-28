@@ -9,7 +9,7 @@
     border-bottom: 1px solid var(--color-border);
 
     .dbDetails {
-      background-color: var(--color-background-light);
+      background-color: var(--color-background);
       height: 48px;
       border-bottom: 1px solid var(--color-border);
       display: flex;
@@ -17,6 +17,7 @@
       align-items: center;
       padding: 0 15px 0 10px;
       gap: 10px;
+      color: var(--color-font-light);
 
       .icon {
         width: 32px;
@@ -24,20 +25,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--color-element-background-light);
+        background-color: var(--color-background-light);
+        border: 1px solid var(--color-border);
         border-radius: var(--radius-m);
+        color: var(--color-font);
       }
 
       .texts {
         display: flex;
         flex-direction: column;
         flex: 1;
+        color: var(--color-font);
 
         .title {
           font-size: var(--font-size-s);
           line-height: var(--line-height-s);
           font-weight: var(--font-weight-semibold);
         }
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: var(--color-font);
       }
     }
 
@@ -82,23 +91,23 @@
     }
 
     .texts {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
 
-        .title {
-          font-size: var(--font-size-s);
-          line-height: var(--line-height-s);
-          font-weight: var(--font-weight-semibold);
-        }
+      .title {
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+        font-weight: var(--font-weight-semibold);
+      }
 
-        .description {
-            font-size: var(--font-size-s);
-            line-height: var(--line-height-s);
-            color: var(--color-font-light);
-            text-align: center;
-        }
+      .description {
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+        color: var(--color-font-light);
+        text-align: center;
+      }
     }
   }
 }
