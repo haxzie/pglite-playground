@@ -42,10 +42,13 @@ INSERT INTO users (username, email, full_name, date_of_birth) VALUES
 export const DEMO_QUERIES = `-- Welcome to PGLite explorer! This is a liteweight browser based editor to explore PGLite
 -- This demo uses PGLite by ElectricSQL (https://github.com/electric-sql/pglite)
 -- All the data will be stored within your browser
--- To try out the examples, select each query and hit "RUN QUERY"
 
 -- For any queries reach out to me on X(formerly twitter) at @haxzie_ (https://x.com/haxzie_)
 
+
+------------------------------------
+-- To try out the examples, select each query from below and hit "RUN QUERY"
+------------------------------------
 
 -- Create Users table
 CREATE TABLE users (
