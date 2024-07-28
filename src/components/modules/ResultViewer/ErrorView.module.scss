@@ -1,0 +1,16 @@
+.errorView {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 15px;
+    color: var(--color-font-light);
+    gap: 10px;
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-s);
+
+    span {
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-error);
+        text-transform: capitalize;
+    }
+}

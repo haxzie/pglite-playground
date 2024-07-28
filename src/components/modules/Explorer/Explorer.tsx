@@ -1,17 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Explorer.module.scss";
 import SearchIcon from "../../icons/SearchIcon";
 import { Panel } from "react-resizable-panels";
 import { useDatabase } from "../../../store/Database";
 import TableRow from "./TableRow";
 import { AnimatePresence } from "framer-motion";
+import { DBSchema } from "../../../store/Database.types";
 
 export default function Explorer() {
   const { loadSchema, databaseSchema } = useDatabase();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     loadSchema();
   }, []);
+
+  // filter schema based on search query
+  const filteredSchema = databaseSchema && Object.values(databaseSchema).filter((table) => {
+    if (searchQuery === "") return true;
+    if (table.name.toLowerCase().includes(searchQuery.toLowerCase())) return true;
+    if (table.columns.some((column) => column.name.toLowerCase().includes(searchQuery.toLowerCase())))
+      return true;
+    return false;
+  }).reduce((acc, table) => ({ ...acc, [table.name]: table }), {} as DBSchema);
 
   return (
     <Panel id="explorer" defaultSize={25} minSize={20} order={1}>
@@ -27,15 +38,20 @@ export default function Explorer() {
         </div> */}
           <div className={styles.searchBox}>
             <SearchIcon size={18} />
-            <input type="text" placeholder="Search for a table or column" />
+            <input
+              type="text"
+              placeholder="Search for a table or column"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
         </div>
 
         <div className={styles.tables}>
           <AnimatePresence>
-            {databaseSchema &&
-              Object.values(databaseSchema).map((table) => (
-                <TableRow key={table.name} table={table.name} schema={table} />
+            {filteredSchema &&
+              Object.values(filteredSchema).map((table) => (
+                <TableRow key={table.name} table={table.name} schema={table} query={searchQuery}/>
               ))}
           </AnimatePresence>
         </div>

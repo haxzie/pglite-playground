@@ -5,18 +5,20 @@ import Editor from "../Editor/Editor";
 import ResultViewer from "../ResultViewer/ResultViewer";
 import { useDatabase } from "../../../store/Database";
 import { Results } from "@electric-sql/pglite";
+import { DatabaseError } from "../../../store/Database.types";
 
 export default function EditorArea() {
   const [result, setResult] = useState<Results<unknown>>();
   const [isQuerying, setIsQuerying] = useState(false);
-  const [error] = useState<unknown | any>();
+  const [error, setError] = useState<DatabaseError | undefined>();
   const { runQuery } = useDatabase();
 
   const run = async (query: string) => {
     setIsQuerying(true);
-    const { result, error } = await runQuery({ query });
+    const { result, error } = await runQuery<{ [key: string]: string | boolean | number }>({ query });
     console.log({ result, error });
     setResult(result);
+    setError(error);
     setIsQuerying(false);
     // setError(error.message);
   };
@@ -26,6 +28,7 @@ export default function EditorArea() {
         <Panel id="editor" minSize={25} order={1}>
           <Editor
             onClickRun={run}
+            totalRows={result?.rows?.length}
             affectedRows={result?.affectedRows}
             isQuerying={isQuerying}
           />

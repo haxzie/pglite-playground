@@ -6,7 +6,7 @@ export const defaultSettingsTokyoNight: CreateThemeOptions["settings"] = {
   foreground: "var(--color-font)",
   caret: "var(--color-font-light)",
   lineHighlight: "var(--color-element-background-dark-transparent)",
-  selection: '#0093ff9e',
+  selection: '#0093ff4e',
   selectionMatch: "#0093ff25",
   gutterBackground: "var(--color-background-light)",
   gutterForeground: "var(--color-font-light)",

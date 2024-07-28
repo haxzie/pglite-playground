@@ -32,5 +32,31 @@ export interface DatabaseState {
     query,
   }: {
     query: string;
-  }) => Promise<{ result: Results<T> | undefined; error: unknown }>;
+  }) => Promise<{ result: Results<T> | undefined; error: DatabaseError | undefined }>;
+}
+
+export interface DatabaseError {
+  code: string;
+  column?: string;
+  columnNumber: number;
+  constraint?: string;
+  dataType?: string;
+  detail?: string;
+  file: string;
+  fileName: string;
+  hint?: string;
+  internalPosition?: string;
+  internalQuery?: string;
+  length: number;
+  line: string;
+  lineNumber: number;
+  message: string;
+  name: string;
+  position: string;
+  routine: string;
+  schema?: string;
+  severity: string;
+  stack: string;
+  table?: string;
+  where?: string;
 }

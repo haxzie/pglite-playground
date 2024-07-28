@@ -21,12 +21,19 @@
     .info {
       display: flex;
       align-items: center;
+      gap: 10px;
 
-      .affectedRows {
+      .affectedRows, .totalRows {
         font-size: var(--font-size-s);
         line-height: var(--line-height-s);
         font-weight: var(--font-weight-semibold);
         color: var(--color-font-light);
+        border-right: 2px solid var(--color-border);
+        padding: 0 15px 0px 0px;
+
+        &:last-child {
+          border-right: none;
+        }
       }
     }
 

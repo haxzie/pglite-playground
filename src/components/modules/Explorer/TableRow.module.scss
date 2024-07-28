@@ -58,6 +58,10 @@
       gap: 10px;
       //   border-bottom: 1px solid var(--color-border);
 
+      &.deHighlight {
+        opacity: 0.5;
+      }
+
       &:last-child {
         border-bottom: none;
       }
@@ -89,6 +93,10 @@
         line-height: var(--line-height-s);
         font-weight: var(--font-weight-semibold);
         flex: 1;
+
+        mark {
+          background-color: #ffe203d0;
+        }
       }
 
       .columnType {

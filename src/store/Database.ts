@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { canModifyDatabase, getDb } from "../modules/db";
 import { Results } from "@electric-sql/pglite";
-import { DatabaseState, RowSchema, DBSchema } from "./Database.types";
+import { DatabaseState, RowSchema, DBSchema, DatabaseError } from "./Database.types";
 import { GET_DATABASE_SCHEMA_QUERY } from "../components/utils/queries";
 
 export const useDatabase = create<DatabaseState>()((set, get) => ({
@@ -39,7 +39,7 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
     query,
   }: {
     query: string;
-  }): Promise<{ result: Results<T> | undefined; error: unknown }> => {
+  }): Promise<{ result: Results<T> | undefined; error: DatabaseError | undefined }> => {
     const db = getDb("default-pgsql");
     try {
       const result = await db.query<T>(query);
@@ -49,8 +49,9 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
       }
       console.log({ result });
       return { result: result, error: undefined };
-    } catch (error) {
-      return { result: undefined, error: error };
+    } catch (error: unknown) {
+      const executionError = error as DatabaseError;
+      return { result: undefined, error: executionError };
     }
   },
 }));
