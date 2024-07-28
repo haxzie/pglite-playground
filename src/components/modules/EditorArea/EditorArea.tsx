@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import EditorLayout from "../../layouts/EditorLayout";
 import { PanelGroup, Panel } from "react-resizable-panels";
 import Editor from "../Editor/Editor";
@@ -8,7 +8,7 @@ import { Results } from "@electric-sql/pglite";
 import { DatabaseError } from "../../../store/Database.types";
 
 export default function EditorArea() {
-  const [result, setResult] = useState<Results<unknown>>();
+  const [result, setResult] = useState<Results<{ [key:string]: string | boolean | number}>>();
   const [isQuerying, setIsQuerying] = useState(false);
   const [error, setError] = useState<DatabaseError | undefined>();
   const { runQuery } = useDatabase();

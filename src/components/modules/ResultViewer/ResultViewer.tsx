@@ -10,7 +10,7 @@ export default function ResultViewer({
   error,
   isQuerying,
 }: {
-  result: Results<unknown> | undefined;
+  result: Results<{ [key: string]: string | boolean | number }> | undefined;
   error: DatabaseError | undefined;
   isQuerying: boolean;
 }) {
@@ -46,7 +46,6 @@ export default function ResultViewer({
               {(result?.rows || []).map((row) =>
                 (result?.fields || []).map((field) => (
                   <div key={field.name} className={styles.cell}>
-                    {/* @ts-ignore */}
                     {row && field.name && row[field.name]
                       ? `${row[field.name]}`
                       : ""}
@@ -55,9 +54,7 @@ export default function ResultViewer({
               )}
             </>
           ) : (
-            <div className={styles.noResult}>
-
-            </div>
+            <div className={styles.noResult}></div>
           )}
         </div>
       ) : (
