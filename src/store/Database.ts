@@ -1,8 +1,14 @@
 import { create } from "zustand";
 import { canModifyDatabase, getDb } from "../modules/db";
 import { Results } from "@electric-sql/pglite";
-import { DatabaseState, RowSchema, DBSchema, DatabaseError } from "./Database.types";
-import { GET_DATABASE_SCHEMA_QUERY } from "../components/utils/queries";
+import {
+  DatabaseState,
+  RowSchema,
+  DBSchema,
+  DatabaseError,
+} from "./Database.types";
+import { DEMO_QUERIES, GET_DATABASE_SCHEMA_QUERY } from "../components/utils/queries";
+import { LAST_RUN_QUERY_KEY } from "../components/utils/constants";
 
 export const useDatabase = create<DatabaseState>()((set, get) => ({
   error: "",
@@ -12,7 +18,9 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
   tables: [],
   databases: [],
   loadSchema: async () => {
-    const { result, error } = await get().runQuery<RowSchema>({ query: GET_DATABASE_SCHEMA_QUERY });
+    const { result, error } = await get().runQuery<RowSchema>({
+      query: GET_DATABASE_SCHEMA_QUERY,
+    });
     if (result) {
       const newSchema: DBSchema = {};
       result.rows.forEach((row: RowSchema) => {
@@ -37,15 +45,30 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
   },
   runQuery: async <T>({
     query,
+    saveQuery = false,
   }: {
     query: string;
-  }): Promise<{ result: Results<T> | undefined; error: DatabaseError | undefined }> => {
+    saveQuery?: boolean;
+  }): Promise<{
+    result: Results<T> | undefined;
+    error: DatabaseError | undefined;
+  }> => {
     const db = getDb("default-pgsql");
     try {
       const result = await db.query<T>(query);
       if (canModifyDatabase(query)) {
         console.log("Modifying database, reloading schema");
         get().loadSchema();
+      }
+
+      if (saveQuery) {
+        // check if the executed query is part of the demo queries
+        // if not, save it to local storage
+        // use regex to check if the query is a demo query
+        const isDemoQuery =DEMO_QUERIES.includes(query);
+        if (!isDemoQuery) {
+          localStorage.setItem(LAST_RUN_QUERY_KEY, query);
+        }
       }
       return { result: result, error: undefined };
     } catch (error: unknown) {

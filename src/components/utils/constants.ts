@@ -1,0 +1,1 @@
+export const LAST_RUN_QUERY_KEY = "last_run_query";

@@ -155,16 +155,16 @@ main {
     span,
     code {
       font-family: "Fira Code", monospace;
-      font-size: var(--font-size);
-      line-height: var(--line-height);
+      font-size: var(--font-size-s);
+      line-height: var(--line-height-s);
     }
   }
   .cm-gutters {
     padding: 0 5px;
     border-right: 1px solid var(--color-border);
-    font-size: var(--font-size);
     font-family: "Fira Code", monospace;
-    line-height: var(--line-height);
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-s);
   }
 
   .cm-tooltip-autocomplete {

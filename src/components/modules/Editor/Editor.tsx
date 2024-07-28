@@ -8,6 +8,8 @@ import { PanelResizeHandle } from "react-resizable-panels";
 import Loader from "../../base/Loader";
 import { useDatabase } from "../../../store/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
+import { LAST_RUN_QUERY_KEY } from "../../utils/constants";
+import { DEMO_QUERIES } from "../../utils/queries";
 
 export default function Editor({
   onClickRun,
@@ -20,7 +22,7 @@ export default function Editor({
   onClickRun: (query: string) => void;
   isQuerying: boolean;
 }) {
-  const [query, setQuery] = React.useState(`SELECT 'Hello World!' as MESSAGE`);
+  const [query, setQuery] = React.useState(localStorage.getItem(LAST_RUN_QUERY_KEY) || DEMO_QUERIES);
   const [selectedQuery, setSelectedQuery] = React.useState<
     string | undefined
   >();

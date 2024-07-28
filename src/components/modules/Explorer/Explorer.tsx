@@ -6,23 +6,43 @@ import { useDatabase } from "../../../store/Database";
 import TableRow from "./TableRow";
 import { AnimatePresence } from "framer-motion";
 import { DBSchema } from "../../../store/Database.types";
+import TableIcon from "../../icons/TableIcon";
 
 export default function Explorer() {
   const { loadSchema, databaseSchema } = useDatabase();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSchemaLoading, setIsSchemaLoading] = useState<boolean>(true);
+
+  const loadCurrentSchema = async () => {
+    setIsSchemaLoading(true);
+    await loadSchema();
+    setIsSchemaLoading(false);
+  }
 
   useEffect(() => {
-    loadSchema();
+    loadCurrentSchema();
   }, []);
 
   // filter schema based on search query
-  const filteredSchema = databaseSchema && Object.values(databaseSchema).filter((table) => {
-    if (searchQuery === "") return true;
-    if (table.name.toLowerCase().includes(searchQuery.toLowerCase())) return true;
-    if (table.columns.some((column) => column.name.toLowerCase().includes(searchQuery.toLowerCase())))
-      return true;
-    return false;
-  }).reduce((acc, table) => ({ ...acc, [table.name]: table }), {} as DBSchema);
+  const filteredSchema =
+    databaseSchema &&
+    Object.values(databaseSchema)
+      .filter((table) => {
+        if (searchQuery === "") return true;
+        if (table.name.toLowerCase().includes(searchQuery.toLowerCase()))
+          return true;
+        if (
+          table.columns.some((column) =>
+            column.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        )
+          return true;
+        return false;
+      })
+      .reduce(
+        (acc, table) => ({ ...acc, [table.name]: table }),
+        {} as DBSchema
+      );
 
   return (
     <Panel id="explorer" defaultSize={25} minSize={20} order={1}>
@@ -49,10 +69,28 @@ export default function Explorer() {
 
         <div className={styles.tables}>
           <AnimatePresence>
-            {filteredSchema &&
+            {filteredSchema && Object.keys(filteredSchema).length > 0 ? (
               Object.values(filteredSchema).map((table) => (
-                <TableRow key={table.name} table={table.name} schema={table} query={searchQuery}/>
-              ))}
+                <TableRow
+                  key={table.name}
+                  table={table.name}
+                  schema={table}
+                  query={searchQuery}
+                />
+              ))
+            ) : !isSchemaLoading && (
+              <div className={styles.noTables}>
+                <div className={styles.icon}>
+                  <TableIcon size={24} />
+                </div>
+                <div className={styles.texts}>
+                  <h5 className={styles.title}>No tables found</h5>
+                  <p className={styles.description}>
+                    Try searching for a table or column or Create new table using SQL query
+                  </p>
+                </div>
+              </div>
+            )}
           </AnimatePresence>
         </div>
       </div>

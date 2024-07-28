@@ -30,8 +30,10 @@ export interface DatabaseState {
   loadSchema: () => Promise<void>;
   runQuery: <T>({
     query,
+    saveQuery,
   }: {
     query: string;
+    saveQuery?: boolean;
   }) => Promise<{ result: Results<T> | undefined; error: DatabaseError | undefined }>;
 }
 
