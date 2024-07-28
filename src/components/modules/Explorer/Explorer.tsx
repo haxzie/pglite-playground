@@ -7,6 +7,9 @@ import TableRow from "./TableRow";
 import { AnimatePresence } from "framer-motion";
 import { DBSchema } from "../../../store/Database.types";
 import TableIcon from "../../icons/TableIcon";
+import DatabaseIcon from "../../icons/DatabaseIcon";
+import ArrowUpDownIcon from "../../icons/ArrowUpDownIcon";
+import PostgresIcon from "../../icons/Databases/Postgres";
 
 export default function Explorer() {
   const { loadSchema, databaseSchema } = useDatabase();
@@ -17,7 +20,7 @@ export default function Explorer() {
     setIsSchemaLoading(true);
     await loadSchema();
     setIsSchemaLoading(false);
-  }
+  };
 
   useEffect(() => {
     loadCurrentSchema();
@@ -48,14 +51,15 @@ export default function Explorer() {
     <Panel id="explorer" defaultSize={25} minSize={20} order={1}>
       <div className={styles.explorer}>
         <div className={styles.header}>
-          {/* <div className={styles.dbDetails}>
-          <div className={styles.icon}>
-            <DatabaseIcon size={18} />
+          <div className={styles.dbDetails}>
+            <div className={styles.icon}>
+              <PostgresIcon size={18} />
+            </div>
+            <div className={styles.texts}>
+              <div className={styles.title}>Postgres Lite</div>
+            </div>
+            <ArrowUpDownIcon size={18} />
           </div>
-          <div className={styles.texts}>
-            <div className={styles.title}>Postgres Lite</div>
-          </div>
-        </div> */}
           <div className={styles.searchBox}>
             <SearchIcon size={18} />
             <input
@@ -69,28 +73,29 @@ export default function Explorer() {
 
         <div className={styles.tables}>
           <AnimatePresence>
-            {filteredSchema && Object.keys(filteredSchema).length > 0 ? (
-              Object.values(filteredSchema).map((table) => (
-                <TableRow
-                  key={table.name}
-                  table={table.name}
-                  schema={table}
-                  query={searchQuery}
-                />
-              ))
-            ) : !isSchemaLoading && (
-              <div className={styles.noTables}>
-                <div className={styles.icon}>
-                  <TableIcon size={24} />
-                </div>
-                <div className={styles.texts}>
-                  <h5 className={styles.title}>No tables found</h5>
-                  <p className={styles.description}>
-                    Try searching for a table or column or Create new table using SQL query
-                  </p>
-                </div>
-              </div>
-            )}
+            {filteredSchema && Object.keys(filteredSchema).length > 0
+              ? Object.values(filteredSchema).map((table) => (
+                  <TableRow
+                    key={table.name}
+                    table={table.name}
+                    schema={table}
+                    query={searchQuery}
+                  />
+                ))
+              : !isSchemaLoading && (
+                  <div className={styles.noTables}>
+                    <div className={styles.icon}>
+                      <TableIcon size={24} />
+                    </div>
+                    <div className={styles.texts}>
+                      <h5 className={styles.title}>No tables found</h5>
+                      <p className={styles.description}>
+                        Try searching for a table or column or Create new table
+                        using SQL query
+                      </p>
+                    </div>
+                  </div>
+                )}
           </AnimatePresence>
         </div>
       </div>

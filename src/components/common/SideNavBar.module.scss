@@ -1,0 +1,58 @@
+.navbar {
+  width: 52px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-background);
+
+  .branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    width: 100%;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+
+    .logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-font);
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+
+    .menuItem {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-font);
+      border-radius: var(--radius-m);
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+        background-color: var(--color-element-background-dark);
+      }
+
+      &.active {
+        opacity: 1;
+        background-color: var(--color-element-background-dark);
+      }
+
+    }
+  }
+}

@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     height: 48px;
-    padding: 10px 15px;
+    padding: 10px;
     gap: 10px;
 
     .chevron {
@@ -35,7 +35,7 @@
       flex: 1;
       font-size: var(--font-size-s);
       line-height: var(--line-height-s);
-      font-weight: var(--font-weight-bold);
+      font-weight: var(--font-weight);
     }
 
     &:hover {
