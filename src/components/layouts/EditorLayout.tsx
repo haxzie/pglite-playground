@@ -9,7 +9,7 @@ export default function EditorLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Panel id="editor" minSize={25} order={1}>
+    <Panel id="editor" minSize={50} order={1}>
       <div className={styles.editorLayout}>
         <EditorTopBar />
         {children}

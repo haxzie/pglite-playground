@@ -6,6 +6,7 @@ export interface DBCredentials {
 
 export interface QueryResult {
   rows?: Array<{ [key: string]: string | number | boolean | undefined | null }>;
+  fields?: Array<{ name: string; dataTypeID?: number; }>;
   rowCount?: number;
   affectedRows?: number;
   error?: string;

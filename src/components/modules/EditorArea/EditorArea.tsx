@@ -4,22 +4,21 @@ import { PanelGroup, Panel } from "react-resizable-panels";
 import Editor from "../Editor/Editor";
 import ResultViewer from "../ResultViewer/ResultViewer";
 import { useDatabase } from "../../../store/Database";
-import { Results } from "@electric-sql/pglite";
-import { DatabaseError } from "../../../store/Database.types";
+import { QueryResult } from "../../../modules/driver";
 
 export default function EditorArea() {
-  const [result, setResult] = useState<Results<{ [key:string]: string | boolean | number}>>();
+  const [result, setResult] = useState<QueryResult>();
   const [isQuerying, setIsQuerying] = useState(false);
-  const [error, setError] = useState<DatabaseError | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const { runQuery } = useDatabase();
 
   const run = async (query: string) => {
     setIsQuerying(true);
-    const { result, error } = await runQuery<{ [key: string]: string | boolean | number }>({ query, saveQuery: true });
+    const result = await runQuery({ query, saveQuery: true });
     setResult(result);
-    setError(error);
+    setError(result?.error);
     setIsQuerying(false);
-    // setError(error.message);
+
   };
   return (
     <EditorLayout>

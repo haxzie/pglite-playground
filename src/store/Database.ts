@@ -1,61 +1,57 @@
 import { create } from "zustand";
-import { canModifyDatabase, getDb } from "../modules/db";
-import { Results } from "@electric-sql/pglite";
-import {
-  DatabaseState,
-  RowSchema,
-  DBSchema,
-  DatabaseError,
-} from "./Database.types";
-import { DEMO_QUERIES, GET_DATABASE_SCHEMA_QUERY } from "../components/utils/queries";
+import { canModifyDatabase } from "../modules/db";
+import { DatabaseState } from "./Database.types";
+import { DEMO_QUERIES } from "../components/utils/queries";
 import { LAST_RUN_QUERY_KEY } from "../components/utils/constants";
+import { QueryResult } from "../modules/driver";
+import DatabaseDrivers from "../drivers";
 
 export const useDatabase = create<DatabaseState>()((set, get) => ({
+  connection: undefined,
   error: "",
   result: undefined,
   currentDatabase: "default-pgsql",
   databaseSchema: undefined,
   tables: [],
   databases: [],
-  loadSchema: async () => {
-    const { result, error } = await get().runQuery<RowSchema>({
-      query: GET_DATABASE_SCHEMA_QUERY,
-    });
-    if (result) {
-      const newSchema: DBSchema = {};
-      result.rows.forEach((row: RowSchema) => {
-        const tableName = row.table_name;
-        if (!newSchema[tableName]) {
-          newSchema[tableName] = {
-            name: tableName,
-            schema: "public",
-            columns: [],
-          };
-        }
-        newSchema[tableName].columns.push({
-          name: row.column_name,
-          type: row.data_type,
-        });
-      });
-      set({ databaseSchema: newSchema });
+  createConnection: async (
+    driverId: string,
+    credentials: Record<string, string>
+  ) => {
+    const driver = DatabaseDrivers[driverId];
+    if (!driver) {
+      throw new Error("Invalid driver");
     }
-    if (error) {
-      console.error(error);
+    const connection = await driver.connect(credentials);
+    set({ connection });
+    await get().loadSchema();
+  },
+  loadSchema: async () => {
+    try {
+      const connection = get().connection;
+      if (get().connection) {
+        const schema = await connection?.fetchSchema();
+        set({ databaseSchema: schema });
+      }
+    } catch (error) {
+      if (error) {
+        console.error(error);
+      }
     }
   },
-  runQuery: async <T>({
+  runQuery: async ({
     query,
     saveQuery = false,
   }: {
     query: string;
     saveQuery?: boolean;
-  }): Promise<{
-    result: Results<T> | undefined;
-    error: DatabaseError | undefined;
-  }> => {
-    const db = getDb("default-pgsql");
+  }): Promise<QueryResult | undefined> => {
+    const connection = get().connection;
+    if (!connection) {
+      return { error: "No connection" };
+    }
     try {
-      const result = await db.query<T>(query);
+      const result = await connection.query(query);
       if (canModifyDatabase(query)) {
         console.log("Modifying database, reloading schema");
         get().loadSchema();
@@ -65,15 +61,15 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
         // check if the executed query is part of the demo queries
         // if not, save it to local storage
         // use regex to check if the query is a demo query
-        const isDemoQuery =DEMO_QUERIES.includes(query);
+        const isDemoQuery = DEMO_QUERIES.includes(query);
         if (!isDemoQuery) {
           localStorage.setItem(LAST_RUN_QUERY_KEY, query);
         }
       }
-      return { result: result, error: undefined };
+      return result;
     } catch (error: unknown) {
-      const executionError = error as DatabaseError;
-      return { result: undefined, error: executionError };
+      const executionError = error as string;
+      return { error: executionError };
     }
   },
 }));

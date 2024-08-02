@@ -1,15 +1,10 @@
-import { DatabaseError } from "../../../store/Database.types";
 import styles from "./ErrorView.module.scss";
 
-export default function ErrorView({ error }: { error: DatabaseError }) {
+export default function ErrorView({ error }: { error: string }) {
   return (
     <div className={styles.errorView}>
-      <strong>
-        {error.severity || "Error"}
-      </strong>
-      <span className={styles.error}>
-        {error.message || "Something went wrong :("}
-      </span>
+      <strong>Error</strong>
+      <span className={styles.error}>{error || "Something went wrong :("}</span>
     </div>
   );
 }

@@ -31,6 +31,7 @@ const PGLiteDriver = createDatabaseDriver({
 
           return {
             rows: result.rows,
+            fields: result.fields,
             rowCount: result.rows.length,
             affectedRows: result.affectedRows,
             error: undefined,

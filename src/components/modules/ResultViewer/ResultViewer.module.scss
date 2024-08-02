@@ -115,6 +115,23 @@
         font-size: var(--font-size-s);
         color: var(--color-font-light);
       }
+
+      .shortcut {
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        code {
+          background-color: var(--color-element-background-light);
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: var(--font-size-s);
+          font-family: "Inter", sans-serif;
+        }
+      }
     }
   }
 }

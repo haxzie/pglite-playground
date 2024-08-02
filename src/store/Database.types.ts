@@ -1,4 +1,5 @@
 import { Results } from "@electric-sql/pglite";
+import { DatabaseConnection, QueryResult } from "../modules/driver";
 
 export interface DBTable {
   name: string;
@@ -21,20 +22,25 @@ export interface RowSchema {
   is_nullable: string;
 }
 export interface DatabaseState {
+  connection: DatabaseConnection | undefined;
   error: unknown;
   databases: string[];
   currentDatabase: string;
   databaseSchema: DBSchema | undefined;
   result: Results<unknown> | undefined;
   tables: string[];
+  createConnection: (
+    driverId: string,
+    credentials: Record<string, string>
+  ) => Promise<void>;
   loadSchema: () => Promise<void>;
-  runQuery: <T>({
+  runQuery: ({
     query,
     saveQuery,
   }: {
     query: string;
     saveQuery?: boolean;
-  }) => Promise<{ result: Results<T> | undefined; error: DatabaseError | undefined }>;
+  }) => Promise<QueryResult | undefined>;
 }
 
 export interface DatabaseError {

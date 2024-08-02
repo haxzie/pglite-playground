@@ -1,17 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ResultViewer.module.scss";
-import { Results } from "@electric-sql/pglite";
 import CodeIcon from "../../icons/CodeIcon";
 import ErrorView from "./ErrorView";
-import { DatabaseError } from "../../../store/Database.types";
+import { QueryResult } from "../../../modules/driver";
 
 export default function ResultViewer({
   result,
   error,
   isQuerying,
 }: {
-  result: Results<{ [key: string]: string | boolean | number }> | undefined;
-  error: DatabaseError | undefined;
+  result: QueryResult | undefined;
+  error: string | undefined;
   isQuerying: boolean;
 }) {
   return (
@@ -33,7 +32,7 @@ export default function ResultViewer({
         <div
           className={styles.result}
           style={{
-            gridTemplateColumns: `repeat(${result?.fields.length}, minmax(min-content, 300px))`,
+            gridTemplateColumns: `repeat(${result?.fields?.length}, minmax(min-content, 300px))`,
           }}
         >
           {result?.fields && result?.fields.length > 0 ? (
@@ -67,6 +66,9 @@ export default function ResultViewer({
             <p className={styles.description}>
               Use the editor to write your SQL query and hit "Run Query" to
               execute
+            </p>
+            <p className={styles.shortcut}>
+              Run Query <code>Cmd/Ctrl + Enter</code>
             </p>
           </div>
         </div>

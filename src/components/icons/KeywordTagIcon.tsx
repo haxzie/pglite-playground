@@ -12,9 +12,9 @@ export default function KeywordTagIcon({ size = 24 }: { size: number }) {
       />
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M3 5a1 1 0 0 1 1-1h5.989a1 1 0 0 1 .825.436l2.05 3a1 1 0 0 1 0 1.128l-2.05 3A1 1 0 0 1 9.99 12H4a1 1 0 0 1-1-1zm1.25.75a.5.5 0 0 1 .5-.5h4.745a.5.5 0 0 1 .405.206l1.636 2.25a.5.5 0 0 1 0 .588L9.9 10.544a.5.5 0 0 1-.405.206H4.75a.5.5 0 0 1-.5-.5z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
     </svg>
   );

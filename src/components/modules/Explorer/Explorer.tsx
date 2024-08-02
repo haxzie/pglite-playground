@@ -7,18 +7,20 @@ import TableRow from "./TableRow";
 import { AnimatePresence } from "framer-motion";
 import { DBSchema } from "../../../store/Database.types";
 import TableIcon from "../../icons/TableIcon";
-import DatabaseIcon from "../../icons/DatabaseIcon";
+// import DatabaseIcon from "../../icons/DatabaseIcon";
 import ArrowUpDownIcon from "../../icons/ArrowUpDownIcon";
 import PostgresIcon from "../../icons/Databases/Postgres";
+import PGLiteDriver from "../../../drivers/pglite";
 
 export default function Explorer() {
-  const { loadSchema, databaseSchema } = useDatabase();
+  const { databaseSchema, createConnection } = useDatabase();
   const [searchQuery, setSearchQuery] = useState("");
   const [isSchemaLoading, setIsSchemaLoading] = useState<boolean>(true);
 
   const loadCurrentSchema = async () => {
     setIsSchemaLoading(true);
-    await loadSchema();
+    await createConnection(PGLiteDriver.id, {});
+    // await loadSchema();
     setIsSchemaLoading(false);
   };
 

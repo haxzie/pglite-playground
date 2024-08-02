@@ -42,7 +42,14 @@ export default function SideNavBar() {
       </div>
       <div className={styles.menu}>
         {menuItems.map((menu) => (
-          <a href={menu.url} className={[styles.menuItem, menu.title === "Editor" && styles.active].join(" ")}>
+          <a
+            key={menu.title}
+            href={menu.url}
+            className={[
+              styles.menuItem,
+              menu.title === "Editor" && styles.active,
+            ].join(" ")}
+          >
             <menu.icon size={18} />
           </a>
         ))}
