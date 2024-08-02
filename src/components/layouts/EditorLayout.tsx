@@ -10,8 +10,10 @@ export default function EditorLayout({
 }) {
   return (
     <Panel id="editor" minSize={25} order={1}>
-      <EditorTopBar />
-      <div className={styles.editorLayout}> {children}</div>
+      <div className={styles.editorLayout}>
+        <EditorTopBar />
+        {children}
+      </div>
     </Panel>
   );
 }

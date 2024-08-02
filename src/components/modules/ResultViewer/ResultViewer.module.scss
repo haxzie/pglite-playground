@@ -4,9 +4,10 @@
   flex-direction: column;
   min-height: 200px;
   height: 100%;
+  flex: 1;
   border-top: 1px solid var(--color-border);
   overflow: auto;
-
+  
   .nprogress {
     position: absolute;
     z-index: 2;
@@ -36,9 +37,10 @@
   }
 
   .result {
+    flex: 1;
     display: grid;
     width: auto;
-    height: 100%;
+    height: auto;
     align-content: flex-start;
 
     .field {
