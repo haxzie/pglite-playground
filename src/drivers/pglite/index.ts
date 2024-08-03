@@ -1,5 +1,5 @@
-import { createDatabaseDriver, DBCredentials } from "../../modules/driver";
-import { DBSchema, RowSchema } from "../../store/Database.types";
+import { createDatabaseDriver, DBCredentials } from "../driver";
+import { DBSchema, RowSchema } from "../../store/DB/Database.types";
 import { PGlite } from "@electric-sql/pglite";
 import { GET_DATABASE_SCHEMA_QUERY } from "./queries";
 

@@ -5,8 +5,11 @@ import HistoryIcon from "../icons/HistoryIcon";
 import SaveIcon from "../icons/SaveIcon";
 import SettingsIcon from "../icons/SettingsIcon";
 import TableIcon from "../icons/TableIcon";
+import { useEditor } from "../../store/Editor";
 
 export default function SideNavBar() {
+  const { activeMenu, setActiveMenu } = useEditor();
+
   const menuItems: Array<{
     title: string;
     icon: ({ size }: { size: number }) => JSX.Element;
@@ -15,7 +18,7 @@ export default function SideNavBar() {
     {
       title: "Editor",
       icon: TableIcon,
-      url: "/",
+      url: "/tables",
     },
     {
       title: "History",
@@ -27,11 +30,11 @@ export default function SideNavBar() {
       icon: SaveIcon,
       url: "/saved",
     },
-    {
-      title: "Settings",
-      icon: SettingsIcon,
-      url: "/settings",
-    },
+    // {
+    //   title: "Settings",
+    //   icon: SettingsIcon,
+    //   url: "/settings",
+    // },
   ];
   return (
     <div className={styles.navbar}>
@@ -42,16 +45,16 @@ export default function SideNavBar() {
       </div>
       <div className={styles.menu}>
         {menuItems.map((menu) => (
-          <a
+          <div
             key={menu.title}
-            href={menu.url}
             className={[
               styles.menuItem,
-              menu.title === "Editor" && styles.active,
+              menu.url === activeMenu && styles.active,
             ].join(" ")}
+            onClick={() => setActiveMenu(menu.url)}
           >
             <menu.icon size={18} />
-          </a>
+          </div>
         ))}
       </div>
     </div>

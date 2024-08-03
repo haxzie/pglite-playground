@@ -1,0 +1,104 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+
+  .searchBox {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    gap: 10px;
+    color: var(--color-font-light);
+    border-bottom: 1px solid var(--color-border);
+
+    input {
+      flex: 1;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      height: 100%;
+      color: var(--color-font);
+      font-size: var(--font-size-s);
+      line-height: var(--line-height-s);
+    }
+  }
+
+  .historyWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+  }
+  .historyList {
+    overflow: auto;
+    flex: 1;
+
+    .historyItem {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 10px 10px 15px;
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
+      background-color: var(--color-element-background-dark);
+
+      .texts {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        overflow: hidden;
+
+        p.query {
+          font-size: var(--font-size-s);
+          line-height: var(--line-height-s);
+          font-weight: var(--font-weight-semibold);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        p.timestamp {
+          font-size: var(--font-size-xs);
+          line-height: var(--line-height-xs);
+          color: var(--color-font-light);
+          display: inline-flex;
+          gap: 5px;
+          .success {
+            color: var(--color-font-light);
+            font-weight: var(--font-weight-semibold);
+          }
+
+          .time {
+            color: var(--color-font-light);
+          }
+        }
+      }
+
+      .moreIcon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: var(--color-font-light);
+
+        &:hover {
+          color: var(--color-font);
+          cursor: pointer;
+          background-color: var(--color-element-background-light);
+        }
+      }
+
+      &:hover {
+        background-color: var(--color-background-light);
+        cursor: pointer;
+      }
+    }
+  }
+}

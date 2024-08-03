@@ -6,7 +6,7 @@ import { tokyoNight } from "./theme";
 import PlayIcon from "../../icons/PlayIcon";
 import { PanelResizeHandle } from "react-resizable-panels";
 import Loader from "../../base/Loader";
-import { useDatabase } from "../../../store/Database";
+import { useDatabase } from "../../../store/DB/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
 import { LAST_RUN_QUERY_KEY } from "../../utils/constants";
 import { DEMO_QUERIES } from "../../utils/queries";

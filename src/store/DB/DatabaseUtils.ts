@@ -1,9 +1,3 @@
-import { PGlite } from "@electric-sql/pglite";
-
-export const getDb = (database: string) => {
-  return new PGlite(`idb://${database}`);
-};
-
 export const canModifyDatabase = (query: string): boolean => {
   // Convert the query to uppercase for case-insensitive matching
   const upperQuery = query.toUpperCase();

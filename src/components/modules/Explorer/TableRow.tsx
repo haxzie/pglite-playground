@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DBTable } from "../../../store/Database.types";
+import { DBTable } from "../../../store/DB/Database.types";
 import styles from "./TableRow.module.scss";
 import TableIcon from "../../icons/TableIcon";
 import ChevronRightIcon from "../../icons/ChevronRightIcon";
@@ -52,9 +52,9 @@ export default function TableRow({
         >
           <ChevronRightIcon size={18} />
         </div>
-        <div className={styles.icon}>
+        {/* <div className={styles.icon}>
           <TableIcon size={18} />
-        </div>
+        </div> */}
         <span>{table}</span>
       </div>
       <AnimatePresence>
@@ -76,9 +76,9 @@ export default function TableRow({
                 <div className={styles.line}>
                   <div className={styles.dash}></div>
                 </div>
-                <div className={styles.icon}>
+                {/* <div className={styles.icon}>
                   <ColumnIcon size={18} />
-                </div>
+                </div> */}
                 <div
                   className={styles.columnName}
                   dangerouslySetInnerHTML={{

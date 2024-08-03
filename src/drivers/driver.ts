@@ -1,4 +1,4 @@
-import { DBSchema } from "../store/Database.types";
+import { DBSchema } from "../store/DB/Database.types";
 
 export interface DBCredentials {
   [key: string]: string | number | boolean | undefined | null;

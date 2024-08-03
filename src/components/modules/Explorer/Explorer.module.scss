@@ -5,12 +5,12 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 340px;
 
   .header {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid var(--color-border);
-
+    
     .dbDetails {
       background-color: var(--color-background);
       height: 48px;
@@ -53,71 +53,8 @@
       }
     }
 
-    .searchBox {
-      height: 48px;
-      display: flex;
-      align-items: center;
-      padding: 0px 15px;
-      gap: 10px;
-      color: var(--color-font-light);
-
-      input {
-        flex: 1;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        height: 100%;
-        color: var(--color-font);
-        font-size: var(--font-size-s);
-        line-height: var(--line-height-s);
-      }
-    }
   }
 
-  .tables {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    flex: 1;
-    height: 100%;
-  }
-  .noTables {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 25px;
-    margin-top: 60px;
-    gap: 15px;
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--color-element-background-light);
-      border-radius: 50%;
-    }
-
-    .texts {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-
-      .title {
-        font-size: var(--font-size-s);
-        line-height: var(--line-height-s);
-        font-weight: var(--font-weight-semibold);
-      }
-
-      .description {
-        font-size: var(--font-size-s);
-        line-height: var(--line-height-s);
-        color: var(--color-font-light);
-        text-align: center;
-      }
-    }
-  }
+ 
 }
+

@@ -1,5 +1,5 @@
 import { Results } from "@electric-sql/pglite";
-import { DatabaseConnection, QueryResult } from "../modules/driver";
+import { DatabaseConnection, QueryResult } from "../../drivers/driver";
 
 export interface DBTable {
   name: string;
@@ -23,11 +23,9 @@ export interface RowSchema {
 }
 export interface DatabaseState {
   connection: DatabaseConnection | undefined;
-  error: unknown;
   databases: string[];
   currentDatabase: string;
   databaseSchema: DBSchema | undefined;
-  result: Results<unknown> | undefined;
   tables: string[];
   createConnection: (
     driverId: string,

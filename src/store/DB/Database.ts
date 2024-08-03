@@ -1,15 +1,14 @@
 import { create } from "zustand";
-import { canModifyDatabase } from "../modules/db";
+import { canModifyDatabase } from "./DatabaseUtils";
 import { DatabaseState } from "./Database.types";
-import { DEMO_QUERIES } from "../components/utils/queries";
-import { LAST_RUN_QUERY_KEY } from "../components/utils/constants";
-import { QueryResult } from "../modules/driver";
-import DatabaseDrivers from "../drivers";
+import { DEMO_QUERIES } from "../../components/utils/queries";
+import { LAST_RUN_QUERY_KEY } from "../../components/utils/constants";
+import { QueryResult } from "../../drivers/driver";
+import DatabaseDrivers from "../../drivers";
+import { useHistory } from "../History";
 
 export const useDatabase = create<DatabaseState>()((set, get) => ({
   connection: undefined,
-  error: "",
-  result: undefined,
   currentDatabase: "default-pgsql",
   databaseSchema: undefined,
   tables: [],
@@ -51,7 +50,17 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
       return { error: "No connection" };
     }
     try {
+      // add query to history
+      useHistory.getState().addHistory({
+        id: Date.now().toString(),
+        name: "",
+        integrationId: "Postgres Lite",
+        query,
+        createdAt: new Date().toISOString(),
+      });
+      
       const result = await connection.query(query);
+
       if (canModifyDatabase(query)) {
         console.log("Modifying database, reloading schema");
         get().loadSchema();

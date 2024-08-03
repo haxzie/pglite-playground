@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ResultViewer.module.scss";
 import CodeIcon from "../../icons/CodeIcon";
 import ErrorView from "./ErrorView";
-import { QueryResult } from "../../../modules/driver";
+import { QueryResult } from "../../../drivers/driver";
 
 export default function ResultViewer({
   result,

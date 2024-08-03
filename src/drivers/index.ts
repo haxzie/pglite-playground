@@ -1,4 +1,4 @@
-import { DatabaseDriver } from "../modules/driver";
+import { DatabaseDriver } from "./driver";
 import PGLiteDriver from "./pglite";
 import SQLiteDriver from "./sqlite";
 

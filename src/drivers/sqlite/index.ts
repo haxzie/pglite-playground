@@ -1,5 +1,5 @@
-import { createDatabaseDriver, DBCredentials } from "../../modules/driver";
-import { DBSchema } from "../../store/Database.types";
+import { createDatabaseDriver, DBCredentials } from "../driver";
+import { DBSchema } from "../../store/DB/Database.types";
 
 const SQLiteDriver = createDatabaseDriver({
   id: "sqlite",

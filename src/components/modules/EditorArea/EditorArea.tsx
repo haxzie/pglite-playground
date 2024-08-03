@@ -3,8 +3,8 @@ import EditorLayout from "../../layouts/EditorLayout";
 import { PanelGroup, Panel } from "react-resizable-panels";
 import Editor from "../Editor/Editor";
 import ResultViewer from "../ResultViewer/ResultViewer";
-import { useDatabase } from "../../../store/Database";
-import { QueryResult } from "../../../modules/driver";
+import { useDatabase } from "../../../store/DB/Database";
+import { QueryResult } from "../../../drivers/driver";
 
 export default function EditorArea() {
   const [result, setResult] = useState<QueryResult>();

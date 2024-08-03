@@ -1,7 +1,13 @@
 .editorLayout {
     display: flex;
     flex-direction: column;
-    flex: 1;
     height: 100%;
     overflow: hidden;
+    flex: 1;
+
+    .editor {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
 }
