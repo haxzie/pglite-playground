@@ -6,6 +6,7 @@ import ClearIcon from "../icons/ClearIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { shallow } from "zustand/shallow";
 import { DEMO_QUERIES } from "../utils/queries";
+import TextTransition, { presets } from "react-text-transition";
 
 export default function EditorTopBar() {
   const { tabs, addTab, activeTab, removeTab, setActiveTab } = useEditor(
@@ -50,7 +51,9 @@ export default function EditorTopBar() {
               ].join(" ")}
               onClick={() => setActiveTab(tab.id)}
             >
-              <span>{tab.name}</span>
+              <TextTransition springConfig={presets.gentle}>
+                {tab.name}
+              </TextTransition>
               <button
                 className={styles.closeBtn}
                 onClick={(event) => {

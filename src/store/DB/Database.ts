@@ -48,11 +48,9 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
     try {
       // add query to history
       useHistory.getState().addHistory({
-        id: Date.now().toString(),
         name: "",
         integrationId: "Postgres Lite",
         query,
-        createdAt: new Date().toISOString(),
       });
       
       const result = await connection.query(query);
