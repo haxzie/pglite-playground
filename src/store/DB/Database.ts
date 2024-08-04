@@ -38,10 +38,8 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
   },
   runQuery: async ({
     query,
-    saveQuery = false,
   }: {
     query: string;
-    saveQuery?: boolean;
   }): Promise<QueryResult | undefined> => {
     const connection = get().connection;
     if (!connection) {

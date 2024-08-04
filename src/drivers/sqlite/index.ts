@@ -23,8 +23,8 @@ const SQLiteDriver = createDatabaseDriver({
         console.log("Fetching databases");
         return ["default", "test"]; // Simulated result
       },
-      fetchSchema: async (database: string) => {
-        console.log(`Fetching schema for database: ${database}`);
+      fetchSchema: async () => {
+        console.log(`Fetching schema for database`);
         return {} as DBSchema; // Simulated result
       },
       close: async () => {

@@ -3,7 +3,6 @@ import Logo from "../icons/Logo";
 // import EditorIcon from "../icons/EditorIcon";
 import HistoryIcon from "../icons/HistoryIcon";
 import SaveIcon from "../icons/SaveIcon";
-import SettingsIcon from "../icons/SettingsIcon";
 import TableIcon from "../icons/TableIcon";
 import { useEditor } from "../../store/Editor";
 import { shallow } from "zustand/shallow";

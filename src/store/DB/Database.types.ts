@@ -1,4 +1,3 @@
-import { Results } from "@electric-sql/pglite";
 import { DatabaseConnection, QueryResult } from "../../drivers/driver";
 
 export interface DBTable {

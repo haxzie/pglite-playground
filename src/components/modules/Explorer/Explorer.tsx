@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Explorer.module.scss";
 import { useDatabase } from "../../../store/DB/Database";
-// import DatabaseIcon from "../../icons/DatabaseIcon";
-import ArrowUpDownIcon from "../../icons/ArrowUpDownIcon";
 import PostgresIcon from "../../icons/Databases/Postgres";
 import PGLiteDriver from "../../../drivers/pglite";
 import Tables from "./Tables";

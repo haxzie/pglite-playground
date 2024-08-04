@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { DBTable } from "../../../store/DB/Database.types";
 import styles from "./TableRow.module.scss";
-import TableIcon from "../../icons/TableIcon";
 import ChevronRightIcon from "../../icons/ChevronRightIcon";
-import ColumnIcon from "../../icons/ColumnIcon";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function TableRow({
