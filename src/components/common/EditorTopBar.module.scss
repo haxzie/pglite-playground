@@ -1,21 +1,128 @@
 .topBar {
-    display: flex;
-    align-items: center;
-    height: 48px !important;
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-    align-items: center;
+  height: 48px !important;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
 
-    .tabName {
+  .tabs {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+    padding: 0 5px;
+    overflow: hidden;
+
+    .addTabBtn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      color: var(--color-font-light);
+      font-size: var(--font-size-m);
+      line-height: var(--line-height-m);
+      margin-right: 5px;
+      cursor: pointer;
+      background-color: var(--color-background-light);
+      border-radius: var(--radius-m);
+
+      &:hover {
+        color: var(--color-font);
+      }
+    }
+
+    .tabGroup {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .tab {
+      position: relative;
+      display: flex;
+      flex-shrink: 1;
+      overflow: hidden;
+      align-items: center;
+      padding: 0 15px;
+      gap: 10px;
+      color: var(--color-font-light);
+      font-size: var(--font-size-s);
+      line-height: var(--line-height-s);
+      font-weight: var(--font-weight-semibold);
+      border-bottom: 2px solid transparent;
+      margin: 5px 0 0 0;
+      border-radius: var(--radius-m) var(--radius-m) 0 0;
+      max-width: 200px;
+
+      span {
+        min-width: 0;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        color: var(--color-font-light);
+      }
+
+      .closeBtn {
         display: flex;
         align-items: center;
-        padding: 0 15px;
-        gap: 10px;
-        height: 100%;
+        width: 28px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
         color: var(--color-font-light);
-        font-size: var(--font-size-s);
-        line-height: var(--line-height-s);
-        font-weight: var(--font-weight-semibold);
+        background-color: var(--color-background-light);
+        border: none;
+        border-radius: 50%;
+        position: absolute;
+        right: 2px;
+        display: none;
+        animation: popIn 0.2s ease-in-out;
+
+        &:hover {
+          color: var(--color-font);
+          cursor: pointer;
+        }
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      &:hover {
+        color: var(--color-font);
+        background-color: var(--color-background-light);
+        cursor: pointer;
+        .closeBtn {
+          display: flex;
+        }
+      }
+
+      &.active {
         border-bottom: 2px solid var(--color-primary-dark);
+        span {
+          color: var(--color-font);
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto 0;
+        width: 1px;
+        height: 20px;
+        background-color: var(--color-border);
+      }
     }
+  }
 }

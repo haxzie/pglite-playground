@@ -4,7 +4,6 @@ import styles from "./Tables.module.scss";
 import { DBSchema } from "../../../store/DB/Database.types";
 import TableIcon from "../../icons/TableIcon";
 import ChevronRightIcon from "../../icons/ChevronRightIcon";
-import SearchIcon from "../../icons/SearchIcon";
 import TableRow from "./TableRow";
 import ExplorerSearchBox from "../../common/ExplorerSearchBox";
 

@@ -5,10 +5,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import MoreIcon from "../../icons/MoreIcon";
 import { useHistory } from "../../../store/History";
 import { DateTime } from "luxon";
+import { useEditor } from "../../../store/Editor";
+import { shallow } from "zustand/shallow";
+import { v4 as uuid } from "uuid";
+import { History } from "../../../modules/sync/sync.types";
 
-export default function History() {
+export default function QueryHistory() {
   const [searchQuery, setSearchQuery] = useState("");
   const { history } = useHistory((state) => ({ history: state.history }));
+  const { addTab } = useEditor(({ addTab }) => ({ addTab }), shallow);
 
   const formatDate = (date: string) => {
     const dateTime = DateTime.fromISO(date);
@@ -47,6 +52,14 @@ export default function History() {
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
+  const handleClick = (record: History) => {
+    addTab({
+      id: uuid(),
+      name: record.name,
+      query: record.query,
+    });
+  }
+
   return (
     <div className={styles.history}>
       <ExplorerSearchBox
@@ -68,6 +81,7 @@ export default function History() {
               transition={{ duration: 0.3 }}
               key={`${record.id}`}
               className={styles.historyItem}
+              onClick={() => handleClick(record)}
             >
               <div className={styles.texts}>
                 <p className={styles.query}>{record.name || record.query}</p>

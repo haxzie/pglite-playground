@@ -9,13 +9,14 @@ import Tables from "./Tables";
 import { useEditor } from "../../../store/Editor";
 import History from "./History";
 import SavedQueries from "./SavedQueries";
+import { shallow } from "zustand/shallow";
 
 export default function Explorer() {
   const { databaseSchema, createConnection } = useDatabase();
   const [isSchemaLoading, setIsSchemaLoading] = useState<boolean>(true);
-  const { activeMenu } = useEditor((state) => ({
-    activeMenu: state.activeMenu,
-  }));
+  const { activeMenu } = useEditor(({ activeMenu }) => ({
+    activeMenu,
+  }), shallow);
 
   const loadCurrentSchema = async () => {
     setIsSchemaLoading(true);

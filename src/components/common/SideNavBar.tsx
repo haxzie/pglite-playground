@@ -6,9 +6,12 @@ import SaveIcon from "../icons/SaveIcon";
 import SettingsIcon from "../icons/SettingsIcon";
 import TableIcon from "../icons/TableIcon";
 import { useEditor } from "../../store/Editor";
+import { shallow } from "zustand/shallow";
 
 export default function SideNavBar() {
-  const { activeMenu, setActiveMenu } = useEditor();
+  const { activeMenu, setActiveMenu } = useEditor(({ activeMenu, setActiveMenu }) => ({
+    activeMenu, setActiveMenu
+  }), shallow);
 
   const menuItems: Array<{
     title: string;
@@ -21,14 +24,14 @@ export default function SideNavBar() {
       url: "/tables",
     },
     {
-      title: "History",
-      icon: HistoryIcon,
-      url: "/history",
-    },
-    {
       title: "Saved Queries",
       icon: SaveIcon,
       url: "/saved",
+    },
+    {
+      title: "History",
+      icon: HistoryIcon,
+      url: "/history",
     },
     // {
     //   title: "Settings",

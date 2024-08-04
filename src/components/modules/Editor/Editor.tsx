@@ -8,21 +8,22 @@ import { PanelResizeHandle } from "react-resizable-panels";
 import Loader from "../../base/Loader";
 import { useDatabase } from "../../../store/DB/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
-import { LAST_RUN_QUERY_KEY } from "../../utils/constants";
-import { DEMO_QUERIES } from "../../utils/queries";
 
 export default function Editor({
+  value,
+  onChange,
   onClickRun,
   affectedRows,
   totalRows,
   isQuerying,
 }: {
+  value: string;
+  onChange: (value: string) => void;
   affectedRows: number | undefined;
   totalRows: number | undefined;
   onClickRun: (query: string) => void;
   isQuerying: boolean;
 }) {
-  const [query, setQuery] = React.useState(localStorage.getItem(LAST_RUN_QUERY_KEY) || DEMO_QUERIES);
   const [selectedQuery, setSelectedQuery] = React.useState<
     string | undefined
   >();
@@ -35,14 +36,14 @@ export default function Editor({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === "Enter") {
-        onClickRun(selectedQuery || query);
+        onClickRun(selectedQuery || value);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [query, selectedQuery, onClickRun]);
+  }, [value, selectedQuery, onClickRun]);
 
   useEffect(() => {
     const defaultSchema = DEFAULT_SCHEMA["postgres"];
@@ -62,27 +63,29 @@ export default function Editor({
     setSchema(mySchema);
   }, [databaseSchema]);
 
-  const customKeys = Prec.high(keymap.of([
-    {
-      key: "Cmd-Enter",
-      run: () => {
-        return false;
+  const customKeys = Prec.high(
+    keymap.of([
+      {
+        key: "Cmd-Enter",
+        run: () => {
+          return false;
+        },
       },
-    },
-    {
-      key: "Ctrl-Enter",
-      run: () => {
-        return false;
+      {
+        key: "Ctrl-Enter",
+        run: () => {
+          return false;
+        },
       },
-    }
-  ]));
+    ])
+  );
 
   return (
     <div className={[styles.editor, "editor-config"].join(" ")}>
       <div className={styles.editorWrapper}>
         <CodeMirror
-          value={query}
-          onChange={(value) => setQuery(value)}
+          value={value}
+          onChange={(value) => onChange(value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && e.metaKey) {
               e.preventDefault();
@@ -99,7 +102,7 @@ export default function Editor({
               })),
               dialect: PostgreSQL,
             }),
-            customKeys
+            customKeys,
           ]}
           width="100%"
           height="100%"
@@ -119,7 +122,7 @@ export default function Editor({
         </div>
         <button
           className={[styles.runButton, isQuerying && styles.loading].join(" ")}
-          onClick={() => onClickRun(selectedQuery || query)}
+          onClick={() => onClickRun(selectedQuery || value)}
         >
           <div className={styles.content}>
             <PlayIcon size={24} />
