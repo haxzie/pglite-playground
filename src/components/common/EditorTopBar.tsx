@@ -5,6 +5,7 @@ import AddIcon from "../icons/AddIcon";
 import ClearIcon from "../icons/ClearIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { shallow } from "zustand/shallow";
+import { DEMO_QUERIES } from "../utils/queries";
 
 export default function EditorTopBar() {
   const { tabs, addTab, activeTab, removeTab, setActiveTab } = useEditor(
@@ -20,7 +21,10 @@ export default function EditorTopBar() {
 
   useEffect(() => {
     if (Object.keys(tabs).length === 0) {
-      addTab({});
+      addTab({
+        name: "Demo Queries",
+        query: DEMO_QUERIES,
+      });
     }
   }, []);
 

@@ -123,6 +123,10 @@
         height: 20px;
         background-color: var(--color-border);
       }
+
+      &:last-child::after {
+        display: none;
+      }
     }
   }
 }

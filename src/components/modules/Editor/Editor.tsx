@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Editor.module.scss";
-import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
+import CodeMirror, { EditorView, keymap, Prec } from "@uiw/react-codemirror";
 import { sql, SQLNamespace, PostgreSQL } from "@codemirror/lang-sql";
 import { tokyoNight } from "./theme";
 import PlayIcon from "../../icons/PlayIcon";
@@ -10,6 +10,7 @@ import { useDatabase } from "../../../store/DB/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
 
 export default function Editor({
+  tabId,
   value,
   onChange,
   onClickRun,
@@ -17,6 +18,7 @@ export default function Editor({
   totalRows,
   isQuerying,
 }: {
+  tabId: string,
   value: string;
   onChange: (value: string) => void;
   affectedRows: number | undefined;
@@ -24,6 +26,7 @@ export default function Editor({
   onClickRun: (query: string) => void;
   isQuerying: boolean;
 }) {
+  const editorRef = useRef<EditorView|null>(null);
   const [selectedQuery, setSelectedQuery] = React.useState<
     string | undefined
   >();
@@ -31,6 +34,16 @@ export default function Editor({
     undefined
   );
   const { databaseSchema } = useDatabase();
+
+  const focusEditor = () => {
+    if (editorRef.current) {
+      editorRef.current.focus();
+    }
+  };
+
+  useEffect(() => {
+    focusEditor();
+  }, [tabId]);
 
   // add cmd + enter to run query
   useEffect(() => {
@@ -84,8 +97,12 @@ export default function Editor({
     <div className={[styles.editor, "editor-config"].join(" ")}>
       <div className={styles.editorWrapper}>
         <CodeMirror
+          autoFocus
           value={value}
           onChange={(value) => onChange(value)}
+          onCreateEditor={(editor) => {
+            editorRef.current = editor;
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter" && e.metaKey) {
               e.preventDefault();

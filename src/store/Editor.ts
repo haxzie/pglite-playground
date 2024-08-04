@@ -55,6 +55,11 @@ export const useEditor = create<EditorState>((set) => ({
       const queryTabs = Object.values(tabs).filter((tab) =>
         tab.name.match(/^Query \d+$/)
       );
+
+      if (queryTabs.length === 0) {
+        return "Query 1";
+      }
+      
       // find the highest number
       const numbers = queryTabs.map((tab) => parseInt(tab.name.split(" ")[1]));
       const max = Math.max(...numbers);

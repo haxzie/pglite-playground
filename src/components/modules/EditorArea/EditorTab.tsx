@@ -28,6 +28,7 @@ export default function EditorTab({ id }: { id: string }) {
     <PanelGroup direction="vertical">
       <Panel id="editor" minSize={25} order={1}>
         <Editor
+          tabId={id}
           value={tabs[id].query}
           onChange={(value) => {
             updateTab({

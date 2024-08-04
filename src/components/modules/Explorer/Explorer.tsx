@@ -56,7 +56,7 @@ export default function Explorer() {
           <div className={styles.texts}>
             <div className={styles.title}>Postgres Lite</div>
           </div>
-          <ArrowUpDownIcon size={18} />
+          {/* <ArrowUpDownIcon size={18} /> */}
         </div>
       </div>
       <ExplorerMenu menu={activeMenu} />

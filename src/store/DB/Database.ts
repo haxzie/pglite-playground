@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { canModifyDatabase } from "./DatabaseUtils";
 import { DatabaseState } from "./Database.types";
-import { DEMO_QUERIES } from "../../components/utils/queries";
-import { LAST_RUN_QUERY_KEY } from "../../components/utils/constants";
 import { QueryResult } from "../../drivers/driver";
 import DatabaseDrivers from "../../drivers";
 import { useHistory } from "../History";
@@ -66,15 +64,6 @@ export const useDatabase = create<DatabaseState>()((set, get) => ({
         get().loadSchema();
       }
 
-      if (saveQuery) {
-        // check if the executed query is part of the demo queries
-        // if not, save it to local storage
-        // use regex to check if the query is a demo query
-        const isDemoQuery = DEMO_QUERIES.includes(query);
-        if (!isDemoQuery) {
-          localStorage.setItem(LAST_RUN_QUERY_KEY, query);
-        }
-      }
       return result;
     } catch (error: unknown) {
       const executionError = error as string;

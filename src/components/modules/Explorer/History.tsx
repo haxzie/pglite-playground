@@ -12,7 +12,7 @@ import { History } from "../../../modules/sync/sync.types";
 
 export default function QueryHistory() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { history } = useHistory((state) => ({ history: state.history }));
+  const { history } = useHistory(({ history}) => ({ history }), shallow);
   const { addTab } = useEditor(({ addTab }) => ({ addTab }), shallow);
 
   const formatDate = (date: string) => {
