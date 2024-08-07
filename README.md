@@ -10,5 +10,5 @@ $ npm install
 $ npm run dev
 ```
 
-## Contrinuting
+## Contributing
 Please open an issue or [contact me](https://twitter.com/haxzie_) if you need any assistance
