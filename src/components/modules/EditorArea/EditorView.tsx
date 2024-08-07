@@ -2,7 +2,7 @@ import { useEditor } from "../../../store/Editor";
 import EditorLayout from "../../layouts/EditorLayout";
 import EditorTab from "./EditorTab";
 
-export default function EditorArea() {
+export default function EditorView() {
   const { tabs, activeTab } = useEditor(({ tabs, activeTab }) => ({
     tabs,
     activeTab,

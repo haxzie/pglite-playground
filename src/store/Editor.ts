@@ -67,13 +67,13 @@ export const useEditor = create<EditorState>((set) => ({
     }
     set((state) => ({
       tabs: {
+        ...state.tabs,
         [_id]: {
           id: _id,
           name: name || generateTabName(state.tabs),
           query: query || "",
           result: result || undefined,
         },
-        ...state.tabs,
       },
       activeTab: _id,
     }));

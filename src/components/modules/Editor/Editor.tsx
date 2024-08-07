@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styles from "./Editor.module.scss";
 import CodeMirror, { EditorView, keymap, Prec } from "@uiw/react-codemirror";
 import { sql, SQLNamespace, PostgreSQL } from "@codemirror/lang-sql";
@@ -8,6 +8,9 @@ import { PanelResizeHandle } from "react-resizable-panels";
 import Loader from "../../base/Loader";
 import { useDatabase } from "../../../store/DB/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
+import CommandIcon from "../../icons/CommandIcon";
+import EnterIcon from "../../icons/EnterIcon";
+import SaveIcon from "../../icons/SaveIcon";
 
 export default function Editor({
   tabId,
@@ -18,7 +21,7 @@ export default function Editor({
   totalRows,
   isQuerying,
 }: {
-  tabId: string,
+  tabId: string;
   value: string;
   onChange: (value: string) => void;
   affectedRows: number | undefined;
@@ -26,7 +29,7 @@ export default function Editor({
   onClickRun: (query: string) => void;
   isQuerying: boolean;
 }) {
-  const editorRef = useRef<EditorView|null>(null);
+  const editorRef = useRef<EditorView | null>(null);
   const [selectedQuery, setSelectedQuery] = React.useState<
     string | undefined
   >();
@@ -45,18 +48,10 @@ export default function Editor({
     focusEditor();
   }, [tabId]);
 
-  // add cmd + enter to run query
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === "Enter") {
-        onClickRun(selectedQuery || value);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [value, selectedQuery, onClickRun]);
+  const handleRunQuery = useCallback(() => {
+    onClickRun(selectedQuery || value);
+  }, [selectedQuery, value, onClickRun]);
+  
 
   useEffect(() => {
     const defaultSchema = DEFAULT_SCHEMA["postgres"];
@@ -81,13 +76,15 @@ export default function Editor({
       {
         key: "Cmd-Enter",
         run: () => {
-          return false;
+          handleRunQuery();
+          return true;
         },
       },
       {
         key: "Ctrl-Enter",
         run: () => {
-          return false;
+          handleRunQuery();
+          return true;
         },
       },
     ])
@@ -137,18 +134,33 @@ export default function Editor({
             </span>
           )}
         </div>
-        <button
-          className={[styles.runButton, isQuerying && styles.loading].join(" ")}
-          onClick={() => onClickRun(selectedQuery || value)}
-        >
-          <div className={styles.content}>
-            <PlayIcon size={24} />
-            Run Query
+        <div className={styles.buttons}>
+          <div className={styles.queryActions}>
+            <button
+              className={styles.iconButton}
+              onClick={() => onClickRun(selectedQuery || value)}
+            >
+              <SaveIcon size={18} />
+            </button>
           </div>
-          <div className={styles.loader}>
-            <Loader />
-          </div>
-        </button>
+          <button
+            className={[styles.runButton, isQuerying && styles.loading].join(
+              " "
+            )}
+            onClick={() => onClickRun(selectedQuery || value)}
+          >
+            <div className={styles.content}>
+              Run Query
+              <div className={styles.cmdEnter}>
+                <CommandIcon size={18} />
+                <EnterIcon size={18} />
+              </div>
+            </div>
+            <div className={styles.loader}>
+              <Loader />
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );

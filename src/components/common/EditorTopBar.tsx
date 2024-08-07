@@ -32,9 +32,6 @@ export default function EditorTopBar() {
   return (
     <div className={styles.topBar}>
       <div className={styles.tabs}>
-        <div className={styles.addTabBtn} onClick={() => addTab({})}>
-          <AddIcon size={20} />
-        </div>
         <div className={styles.tabGroup}>
           <AnimatePresence />
           {Object.values(tabs).map((tab) => (
@@ -66,6 +63,9 @@ export default function EditorTopBar() {
             </motion.div>
           ))}
           <AnimatePresence />
+        </div>
+        <div className={styles.addTabBtn} onClick={() => addTab({})}>
+          <AddIcon size={20} />
         </div>
       </div>
     </div>
