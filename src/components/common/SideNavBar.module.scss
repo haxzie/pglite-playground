@@ -26,7 +26,7 @@
     }
   }
 
-  .menu {
+  .menu, .links {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,5 +53,9 @@
         border-right: 2px solid var(--color-primary);
       }
     }
+  }
+
+  .menu {
+    flex: 1;
   }
 }

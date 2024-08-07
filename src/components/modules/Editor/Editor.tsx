@@ -3,14 +3,14 @@ import styles from "./Editor.module.scss";
 import CodeMirror, { EditorView, keymap, Prec } from "@uiw/react-codemirror";
 import { sql, SQLNamespace, PostgreSQL } from "@codemirror/lang-sql";
 import { tokyoNight } from "./theme";
-import PlayIcon from "../../icons/PlayIcon";
+// import PlayIcon from "../../icons/PlayIcon";
 import { PanelResizeHandle } from "react-resizable-panels";
 import Loader from "../../base/Loader";
 import { useDatabase } from "../../../store/DB/Database";
 import { DEFAULT_SCHEMA } from "../../utils/schema";
 import CommandIcon from "../../icons/CommandIcon";
 import EnterIcon from "../../icons/EnterIcon";
-import SaveIcon from "../../icons/SaveIcon";
+// import SaveIcon from "../../icons/SaveIcon";
 
 export default function Editor({
   tabId,
@@ -136,12 +136,12 @@ export default function Editor({
         </div>
         <div className={styles.buttons}>
           <div className={styles.queryActions}>
-            <button
+            {/* <button
               className={styles.iconButton}
               onClick={() => onClickRun(selectedQuery || value)}
             >
               <SaveIcon size={18} />
-            </button>
+            </button> */}
           </div>
           <button
             className={[styles.runButton, isQuerying && styles.loading].join(
