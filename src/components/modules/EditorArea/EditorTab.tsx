@@ -4,7 +4,6 @@ import Editor from "../Editor/Editor";
 import { useState } from "react";
 import { useDatabase } from "../../../store/DB/Database";
 import ResultViewer from "../ResultViewer/ResultViewer";
-import { generateQueryName } from "../../../modules/AI";
 
 export default function EditorTab({ id }: { id: string }) {
   const { tabs, updateTab } = useEditor(({ tabs, updateTab }) => ({
@@ -15,19 +14,19 @@ export default function EditorTab({ id }: { id: string }) {
   const [isQuerying, setIsQuerying] = useState(false);
   const { runQuery } = useDatabase();
 
-  const generateTabName = async (query: string) => {
-    console.log(`Generating name for query: ${query}`);
-    // check if the editor has name in the format of "Query #"
-    if (tabs[id].name.match(/^Query \d+$/)) {
-      const name = await generateQueryName(query);
-      if (name) {
-        updateTab({
-          ...tabs[id],
-          name,
-        });
-      }
-    }
-  };
+  // const generateTabName = async (query: string) => {
+  //   console.log(`Generating name for query: ${query}`);
+  //   // check if the editor has name in the format of "Query #"
+  //   if (tabs[id].name.match(/^Query \d+$/)) {
+  //     const name = await generateQueryName(query);
+  //     if (name) {
+  //       updateTab({
+  //         ...tabs[id],
+  //         name,
+  //       });
+  //     }
+  //   }
+  // };
 
   const run = async (query: string) => {
     setIsQuerying(true);
@@ -37,7 +36,7 @@ export default function EditorTab({ id }: { id: string }) {
       result,
     });
     setIsQuerying(false);
-    generateTabName(query);
+    // generateTabName(query);
   };
 
   return (

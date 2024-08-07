@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { History } from "../modules/sync/sync.types";
 import { v4 as uuid } from "uuid";
-import { generateQueryName } from "../modules/AI";
 
 export interface HistoryState {
   history: Record<string, History>;
@@ -45,14 +44,11 @@ export const useHistory = create<HistoryState>((set) => ({
     }));
 
     try {
-      const name = await generateQueryName(query);
-      if (name) {
-        set((state) => {
-          const history = { ...state.history };
-          history[id].name = name;
-          return { history };
-        });
-      }
+      set((state) => {
+        const history = { ...state.history };
+        history[id].name = name;
+        return { history };
+      });
     } catch (error) {
       console.error(error);
     }
