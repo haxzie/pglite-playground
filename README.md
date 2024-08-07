@@ -3,3 +3,12 @@ This is a playground for [PGlite](https://github.com/electric-sql/pglite). You c
 
 ![cover](/public/cover.png)
 
+## Setup project for development
+To run the project locally, clone the repo and run
+```sh
+$ npm install
+$ npm run dev
+```
+
+## Contrinuting
+Please open an issue or [contact me](https://twitter.com/haxzie_) if you need any assistance
